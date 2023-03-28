@@ -50,19 +50,12 @@ begin
 
     end if;
 
-    if ALUControl = "0110" then
-        if Op1 = Op2 then
-          Zero <= '1';
-        else
-          Zero <= '0';
-        end if;
-    else 
+ 
       if ResultTmp = X"00000000" then
         Zero <= '1';
       else
         Zero <= '0';
       end if;
-    end if;
 
     Result <= ResultTmp;
   end process;

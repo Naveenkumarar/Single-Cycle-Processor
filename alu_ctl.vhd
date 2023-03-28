@@ -56,7 +56,7 @@ begin
             when "10" => --SB-Type
                 case funct3 is
                     when "000" => --beq
-                        alu_ctl <= "0110"; --beq
+                        alu_ctl <= "0010"; --beq
                     when others =>
                         alu_ctl <= "XXXX"; --invalid instruction
                 
