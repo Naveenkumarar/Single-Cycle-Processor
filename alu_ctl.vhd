@@ -12,10 +12,8 @@ end alu_control;
 architecture Behavioral of alu_control is
 
 begin
-
-    process(funct3, alu_op)
+    process(funct7,funct3, alu_op)
     begin
-            report "aluc";
 
         case alu_op is
             when "00" => --I-type instructions
