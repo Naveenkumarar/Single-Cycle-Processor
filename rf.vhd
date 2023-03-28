@@ -2,8 +2,12 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.std_logic_textio.all;
+use std.textio.all;
+
 entity Register_File is
   port (
+	pcout : in std_logic_vector(31 downto 0);
     RegDst   : in  std_logic;
     WriteReg : in  std_logic_vector(4 downto 0);
     WriteData: in  std_logic_vector(31 downto 0);
@@ -15,7 +19,8 @@ entity Register_File is
 end Register_File;
 
 architecture Behavioral of Register_File is
-  type Memory is array (0 to 31) of STD_LOGIC_VECTOR(31 downto 0);
+  file rf_file : text open write_mode is "rf_data.txt";
+	type Memory is array (0 to 31) of STD_LOGIC_VECTOR(31 downto 0);
 	signal RF : Memory := (
 		X"00000000", --$zero - x0
 		X"00000002", --$at - x1
@@ -54,6 +59,7 @@ architecture Behavioral of Register_File is
 begin
 
   process (WriteData, WriteReg, RegDst, ReadReg1, ReadReg2)
+  variable row          : line;
   begin
     if RegDst = '1' then -- Write to Register x[rd]
       RF(to_integer(unsigned(WriteReg))) <= WriteData;
@@ -71,6 +77,17 @@ begin
 		ReadData2 <= RF(to_integer(unsigned(ReadReg2)));
 	end if;
   	
+	hwrite(row,pcout, right, 15);
+	
+	writeline(rf_file,row);
+	for i in 0 to 31 loop
+		write(row,i, right, 15);
+      
+		hwrite(row,RF(i), right, 15);
+		
+		writeline(rf_file,row);
+	end loop;
+
   end process;
   
 end Behavioral;

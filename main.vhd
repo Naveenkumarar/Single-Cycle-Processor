@@ -51,6 +51,7 @@ architecture Behavioral of Main is
 	
 	component Register_File is
 		port (
+            pcout : in std_logic_vector(31 downto 0);
             RegDst   : in  std_logic;
             WriteReg : in  std_logic_vector(4 downto 0);
             WriteData: in  std_logic_vector(31 downto 0);
@@ -86,6 +87,7 @@ architecture Behavioral of Main is
 	
 	component data_mem is
 		 port (
+                pcout : in std_logic_vector(31 downto 0);  
                 addr: in std_logic_vector(31 downto 0);  -- address input
                 data_in: in std_logic_vector(31 downto 0);  -- data input
                 mem_write: in std_logic;  -- write enable input
@@ -164,9 +166,9 @@ begin
     PC     	 	: Program_Counter port map (CLK,Reset,pcout, pcout, immOut, branch,zero);
 	IM          : Instruction_Memory port map (pcout,instruction);
     CTL         : control_unit port map (opcode,f3,aluOp,regWrite,memRead,memWrite,branch,memToTeg,aluSrc);
-    RF          : Register_File port map (regWrite,writereg,dataout,readreg1,readreg2,readdata1,readdata2);
+    RF          : Register_File port map (pcout,regWrite,writereg,dataout,readreg1,readreg2,readdata1,readdata2);
     IMG         : Immediate_gen port map (instruction,immOut);
     ALUC        : alu_control port map (f3,f7,aluOp,aluCtl);
     ALUP         : ALU port map (readdata1,readdata2,aluCtl,immOut,aluSrc,zero,result);
-    DM          : data_mem port map (result,readdata2,memWrite,memRead,memToTeg,dataout);
+    DM          : data_mem port map (pcout,result,readdata2,memWrite,memRead,memToTeg,dataout);
 end Behavioral;

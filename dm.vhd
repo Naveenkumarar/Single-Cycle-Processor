@@ -2,8 +2,12 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+use ieee.std_logic_textio.all;
+use std.textio.all;
+
 entity data_mem is
     port (
+		pcout : in std_logic_vector(31 downto 0);
         addr: in std_logic_vector(31 downto 0);  -- address input
         data_in: in std_logic_vector(31 downto 0);  -- data input
         mem_write: in std_logic;  -- write enable input
@@ -14,7 +18,8 @@ entity data_mem is
 end data_mem;
 
 architecture Behavioral of data_mem is
-    type Memory is array (0 to 47) of STD_LOGIC_VECTOR(31 downto 0);
+file dm_file : text open write_mode is "dm_data.txt";
+      type Memory is array (0 to 47) of STD_LOGIC_VECTOR(31 downto 0);
 	signal mem : Memory := (
 		X"00000055",
 		X"000000AA",
@@ -67,6 +72,7 @@ architecture Behavioral of data_mem is
 	);
 begin
     process (addr, data_in, mem_write, mem_read)
+	variable row          : line;
     begin
         if mem_write = '1' then  -- write operation
             mem(to_integer(unsigned(addr))) <= data_in;
@@ -78,6 +84,15 @@ begin
                 data_out <= addr;
             end if;
         -- end if;
-
+	hwrite(row,pcout, right, 15);
+	
+	writeline(dm_file,row);
+	for i in 0 to 47 loop
+		write(row,i, right, 15);
+      
+		hwrite(row,mem(i), right, 15);
+		
+		writeline(dm_file,row);
+	end loop;
     end process;
 end Behavioral;
