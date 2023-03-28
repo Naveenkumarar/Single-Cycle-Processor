@@ -17,12 +17,12 @@ file . "rf.vhd" "d11a96dfbdd521b5ab4050c63d835a00c4a9d50d" "20230328035114.095":
 file . "pc.vhd" "77fca10b80d1a49ccc55b5ef148c40af4b1765c1" "20230328034858.722":
   entity program_counter at 2( 1) + 0 on 331;
   architecture behavioral of program_counter at 19( 473) + 0 on 332;
-file . "im.vhd" "396d8837ba1aae2ee28e5a4362b66e3a10faf691" "20230328144810.234":
-  entity instruction_memory at 1( 0) + 0 on 403;
-  architecture behavioral of instruction_memory at 13( 251) + 0 on 404;
-file . "main.vhd" "55caa7bb16538b155193895f4c21e9c0256b503c" "20230328041659.184":
-  entity main at 1( 0) + 0 on 391;
-  architecture behavioral of main at 14( 218) + 0 on 392;
+file . "im.vhd" "8b1959d64d61fbebe98607a431c2ba7571904fa9" "20230328153821.066":
+  entity instruction_memory at 1( 0) + 0 on 411;
+  architecture behavioral of instruction_memory at 13( 251) + 0 on 412;
+file . "main.vhd" "3f0ebbd19997ccd81be86e08d066a049dd6ce80f" "20230328145000.045":
+  entity main at 1( 0) + 0 on 405;
+  architecture behavioral of main at 14( 218) + 0 on 406;
 file . "alu_ctl.vhd" "244d0fb7861bd96105e83216e9da0422480c8c69" "20230328035337.737":
   entity alu_control at 1( 0) + 0 on 351;
   architecture behavioral of alu_control at 12( 333) + 0 on 352;

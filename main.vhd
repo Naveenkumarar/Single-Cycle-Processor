@@ -164,9 +164,9 @@ begin
     PC     	 	: Program_Counter port map (CLK,Reset,pcout, pcout, immOut, branch,zero);
 	IM          : Instruction_Memory port map (pcout,instruction);
     CTL         : control_unit port map (opcode,f3,aluOp,regWrite,memRead,memWrite,branch,memToTeg,aluSrc);
-    ALUC        : alu_control port map (f3,f7,aluOp,aluCtl);
     RF          : Register_File port map (regWrite,writereg,dataout,readreg1,readreg2,readdata1,readdata2);
     IMG         : Immediate_gen port map (instruction,immOut);
+    ALUC        : alu_control port map (f3,f7,aluOp,aluCtl);
     ALUP         : ALU port map (readdata1,readdata2,aluCtl,immOut,aluSrc,zero,result);
     DM          : data_mem port map (result,readdata2,memWrite,memRead,memToTeg,dataout);
 end Behavioral;
