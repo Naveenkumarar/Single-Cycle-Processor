@@ -70,13 +70,14 @@ begin
     begin
         if mem_write = '1' then  -- write operation
             mem(to_integer(unsigned(addr))) <= data_in;
-        elsif mem_read = '1' then  -- read operation
+		end if;
+        -- if mem_read = '1' then  -- read operation
             if mem_to_reg = '1' then
                 data_out <= mem(to_integer(unsigned(addr)));
             else 
                 data_out <= addr;
             end if;
-        end if;
+        -- end if;
 
     end process;
 end Behavioral;

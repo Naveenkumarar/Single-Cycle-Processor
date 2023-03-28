@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std.all;
 
 entity alu_control is
     Port ( funct3 : in  STD_LOGIC_VECTOR (2 downto 0);
@@ -14,6 +15,8 @@ begin
 
     process(funct3, alu_op)
     begin
+            report "aluc";
+
         case alu_op is
             when "00" => --I-type instructions
                 case funct3 is

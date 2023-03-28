@@ -31,7 +31,7 @@ begin
             when "0010011" => -- I-type instructions addi
                 alu_op <= "00";
                 reg_write <= '1';
-                mem_read <= '0';
+                mem_read <= '1';
                 mem_write <= '0';
                 branch <= '0';
                 mem_to_reg <= '0';

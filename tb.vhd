@@ -18,7 +18,7 @@ ARCHITECTURE behavior OF tb_MIPSProcessor IS
     
 
    --Inputs
-   signal CLK : std_logic := '0';
+   signal CLK : std_logic := '1';
 	signal Reset : std_logic := '0';
 
    -- Clock period definitions
@@ -35,9 +35,9 @@ BEGIN
    -- Clock process definitions
    CLK_process :process
    begin
-		CLK <= '0';
-		wait for CLK_period/2;
 		CLK <= '1';
+		wait for CLK_period/2;
+		CLK <= '0';
 		wait for CLK_period/2;
    end process;
  

@@ -55,7 +55,7 @@ begin
 
   process (WriteData, WriteReg, RegDst, ReadReg1, ReadReg2)
   begin
-    if RegDst = '0' then -- Write to Register x[rd]
+    if RegDst = '1' then -- Write to Register x[rd]
       RF(to_integer(unsigned(WriteReg))) <= WriteData;
     end if;
 	
