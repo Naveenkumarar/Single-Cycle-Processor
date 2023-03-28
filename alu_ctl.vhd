@@ -17,27 +17,28 @@ begin
 
         case alu_op is
             when "00" => --I-type instructions
-                case funct3 is
-                    when "000" => --addi
-                        alu_ctl <= "0000"; --addi
-                    when "010" => --lw
-                        alu_ctl <= "0000"; --lw
-                    when others =>
-                        alu_ctl <= "XXXX"; --invalid instruction
-                end case;
+                alu_ctl <= "0010"; --add
+                -- case funct3 is
+                --     when "000" => --addi
+                --         alu_ctl <= "0000"; --addi
+                --     when "010" => --lw
+                --         alu_ctl <= "0000"; --lw
+                --     when others =>
+                --         alu_ctl <= "XXXX"; --invalid instruction
+                -- end case;
                 
             when "01" => --R-type instructions
                 case funct3 is
                     when "000" => --add
                         if funct7 = "0000000" then
-                            alu_ctl <= "0000"; --add
+                            alu_ctl <= "0010"; --add
                         elsif funct7 = "0100000" then
-                            alu_ctl <= "0010"; --sub
+                            alu_ctl <= "0110"; --sub
                         end if;
                     when "111" => --and
-                        alu_ctl <= "0100"; --and
+                        alu_ctl <= "0000"; --and
                     when "110" => --or
-                        alu_ctl <= "0101"; --or
+                        alu_ctl <= "0001"; --or
                         
                     when others =>
                         alu_ctl <= "XXXX"; --invalid instruction
@@ -46,7 +47,7 @@ begin
             when "11" => --S-Type 
                 case funct3 is
                     when "010" => --sw
-                        alu_ctl <= "0000"; --sw
+                        alu_ctl <= "0010"; --sw
                     when others =>
                         alu_ctl <= "XXXX"; --invalid instruction
                 
@@ -56,7 +57,7 @@ begin
             when "10" => --SB-Type
                 case funct3 is
                     when "000" => --beq
-                        alu_ctl <= "0010"; --beq
+                        alu_ctl <= "0110"; --beq
                     when others =>
                         alu_ctl <= "XXXX"; --invalid instruction
                 

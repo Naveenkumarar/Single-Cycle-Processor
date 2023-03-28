@@ -21,30 +21,18 @@ begin
   begin
     if AluSrc = '1' then
       case ALUControl is
-        when "0000" => ResultTmp :=STD_LOGIC_VECTOR(UNSIGNED(Op1) + UNSIGNED(imm_out));  -- add
-        when "0010" => ResultTmp := STD_LOGIC_VECTOR(UNSIGNED(Op1) - UNSIGNED(imm_out));   -- sub
-        when "0100" => ResultTmp := Op1 and imm_out; -- and
-        when "0101" => ResultTmp := Op1 or imm_out;  -- or
-        when "1010" =>
-          if (Op1 < imm_out) then
-						ResultTmp := X"00000001";
-					else 
-						ResultTmp := X"00000000";
-					end if;  -- slt
+        when "0010" => ResultTmp :=STD_LOGIC_VECTOR(UNSIGNED(Op1) + UNSIGNED(imm_out));  -- add
+        when "0110" => ResultTmp := STD_LOGIC_VECTOR(UNSIGNED(Op1) - UNSIGNED(imm_out));   -- sub
+        when "0000" => ResultTmp := Op1 and imm_out; -- and
+        when "0001" => ResultTmp := Op1 or imm_out;  -- or
         when others  => ResultTmp := (others => 'X');
       end case;
     else 
       case ALUControl is
-        when "0000" => ResultTmp := STD_LOGIC_VECTOR(UNSIGNED(Op1) + UNSIGNED(Op2));   -- add
-        when "0010" => ResultTmp := STD_LOGIC_VECTOR(UNSIGNED(Op1) - UNSIGNED(Op2));   -- sub
-        when "0100" => ResultTmp := Op1 and Op2; -- and
-        when "0101" => ResultTmp := Op1 or Op2;  -- or
-        when "1010" =>  
-          if (Op1 < Op2) then
-						ResultTmp := X"00000001";
-					else 
-						ResultTmp := X"00000000";
-					end if;  -- slt
+        when "0010" => ResultTmp := STD_LOGIC_VECTOR(UNSIGNED(Op1) + UNSIGNED(Op2));   -- add
+        when "0110" => ResultTmp := STD_LOGIC_VECTOR(UNSIGNED(Op1) - UNSIGNED(Op2));   -- sub
+        when "0000" => ResultTmp := Op1 and Op2; -- and
+        when "0001" => ResultTmp := Op1 or Op2;  -- or
         when others  => ResultTmp := (others => 'X');
       end case;
 
