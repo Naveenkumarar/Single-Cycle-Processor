@@ -24,3 +24,4 @@ ghdl -a --ieee=synopsys tb.vhd
 ghdl -e --ieee=synopsys tb_MIPSProcessor
 ghdl -r --ieee=synopsys tb_MIPSProcessor --stop-time=200ns  --fst=demo.fst
 ````
+# Pipeline-Mips-VHDL
